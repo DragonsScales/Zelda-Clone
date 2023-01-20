@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Char4_Sword_32px.png-79129b43531223cea34bdda3afc82282.stex"
+path="res://.import/Char4_Sword_32px.png-399d5967832f482a2c35d680dde6e03a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/TAP_anim_v2/Animations ver2/char4/Char4_Sword_32px.png"
-dest_files=[ "res://.import/Char4_Sword_32px.png-79129b43531223cea34bdda3afc82282.stex" ]
+source_file="res://Art/TAP_anim_v2/Animations ver2/Char4/Char4_Sword_32px.png"
+dest_files=[ "res://.import/Char4_Sword_32px.png-399d5967832f482a2c35d680dde6e03a.stex" ]
 
 [params]
 
