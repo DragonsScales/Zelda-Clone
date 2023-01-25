@@ -27,9 +27,14 @@ window/size/test_height=600
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
+[global]
+
+theme=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+theme/custom="res://Art/GUI.tres"
 
 [importer_defaults]
 
