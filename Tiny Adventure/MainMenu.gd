@@ -1,7 +1,11 @@
 extends Node2D
 
 
-func _read():
+
+func _ready():
+	#uncomment if you want to change player
+	#the character selection screen won't show the player you're actually selecting currently
+	#Utils.save_game()
 	Utils.load_game()
 	
 func _on_PlayBtn_pressed():

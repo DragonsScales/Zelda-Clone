@@ -28,7 +28,7 @@ func _on_Left_pressed():
 
 
 func _on_Right_pressed():
-	if Game.PlayerSelect < 6:
+	if Game.PlayerSelect < 5:
 		Game.PlayerSelect += 1
 
 

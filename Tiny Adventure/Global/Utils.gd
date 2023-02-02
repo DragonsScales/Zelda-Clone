@@ -12,7 +12,7 @@ func get_file(is_write: bool):
 		password = OS.get_unique_id()
 	if is_write:
 # warning-ignore:return_value_discarded
-		save_game.open_encrypted_with_pass(SAVE_PASS, File.WRITE, password)
+		save_game.open_encrypted_with_pass(SAVE_PATH, File.WRITE, password)
 	else:
 		if not save_game.file_exists(SAVE_PATH):
 			return
