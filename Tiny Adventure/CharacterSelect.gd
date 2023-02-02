@@ -34,3 +34,5 @@ func _on_Right_pressed():
 
 func _on_Select_pressed():
 	get_tree().change_scene("res://World.tscn")
+	Game.FirstLaunch = true
+	Utils.save_game()
