@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Art/Tiny Adventure Pack/Other/Misc/Sign.png" type="Texture" id=1]
+[ext_resource path="res://Art/Tiny Adventure Pack/Tiny Adventure Pack/Other/Misc/Sign.png" type="Texture" id=1]
 [ext_resource path="res://World Objects/Sign.gd" type="Script" id=2]
 [ext_resource path="res://Art/Font/PixeloidMono-1G8ae.ttf" type="DynamicFontData" id=3]
 
