@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/TAP_anim_v2/TAP_anim_v2/Animations ver2/Char1/Char1_walk_16px.png" type="Texture" id=2]
 [ext_resource path="res://Art/TAP_anim_v2/TAP_anim_v2/Animations ver2/Char1/Char1_idle_16px.png" type="Texture" id=3]
+[ext_resource path="res://Art/TAP_anim_v2/TAP_anim_v2/Animations ver2/Char1/Char1_Sword_32px.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 3 )
@@ -40,6 +41,87 @@ var players = {
 func _ready():
 	self.texture = players[int(Game.PlayerSelect)]
 "
+
+[sub_resource type="GDScript" id=34]
+script/source = "extends Sprite
+
+var players = {
+	0: preload(\"res://Art/TAP_anim_v2/TAP_anim_v2/Animations ver2/Char1/Char1_Sword_32px.png\"),
+	1: preload(\"res://Art/TAP_anim_v2/TAP_anim_v2/Animations ver2/Char2/Char2_Sword_32px.png\"),
+	2: preload(\"res://Art/TAP_anim_v2/TAP_anim_v2/Animations ver2/Char3/Char3_Sword_32px.png\"),
+	3: preload(\"res://Art/TAP_anim_v2/TAP_anim_v2/Animations ver2/Char4/Char4_Sword_32px.png\"),
+	4: preload(\"res://Art/TAP_anim_v2/TAP_anim_v2/Animations ver2/Char5/Char5_Sword_32px.png\"),
+	5: preload(\"res://Art/TAP_anim_v2/TAP_anim_v2/Animations ver2/Char6/Char6_Sword_32px.png\")
+}
+
+
+func _ready():
+	self.texture = players[int(Game.PlayerSelect)]
+"
+
+[sub_resource type="Animation" id=35]
+resource_name = "Attack Down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "Attack Left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "Attack Right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15 ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "Attack Up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle Down"
@@ -134,6 +216,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Attack:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -300,7 +394,20 @@ vframes = 4
 frame = 1
 script = SubResource( 33 )
 
+[node name="Attack" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -6.5 )
+scale = Vector2( 1, 0.96875 )
+texture = ExtResource( 4 )
+hframes = 4
+vframes = 4
+script = SubResource( 34 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Attack Down" = SubResource( 35 )
+"anims/Attack Left" = SubResource( 36 )
+"anims/Attack Right" = SubResource( 37 )
+"anims/Attack Up" = SubResource( 38 )
 "anims/Idle Down" = SubResource( 2 )
 "anims/Idle Left" = SubResource( 3 )
 "anims/Idle Right" = SubResource( 4 )
@@ -318,3 +425,5 @@ active = true
 parameters/playback = SubResource( 18 )
 parameters/Idle/blend_position = Vector2( -0.00158477, -0.01227 )
 parameters/Walk/blend_position = Vector2( -0.0031696, 0 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

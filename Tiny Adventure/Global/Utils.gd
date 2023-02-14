@@ -25,6 +25,10 @@ func save_game():
 	var data: Dictionary = {
 		"PlayerSelect": Game.PlayerSelect,
 		"FirstLaunch": Game.FirstLaunch,
+		"Player_HP": Game.Player_HP,
+		"Player_Max_HP": Game.Player_Max_HP,
+		
+		
 	}
 	save_game.store_line(to_json(data))
 	save_game.close()
@@ -39,5 +43,7 @@ func load_game():
 		if current_line:
 			Game.PlayerSelect = current_line["PlayerSelect"]
 			Game.FirstLaunch = current_line["FirstLaunch"]
+			Game.Player_HP = current_line["Player_HP"]
+			Game.Player_Max_HP = current_line["Player_Max_HP"]
 			
 	save_game.close()

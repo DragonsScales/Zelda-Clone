@@ -7,18 +7,17 @@ var direction = Vector2()
 func _physics_process(delta):
 	
 	if see_player == true:
+		#he adds this in, but it doesn't actually matter
+		direction = Vector2.ZERO;
+		
 		var player = get_node("../../Friendly/Player")
 		direction = (player.position - position).normalized()
-		if direction.x < 0:
-			get_node("AnimatedSprite").play("Walk Left")
-		elif direction.x > 0:
-			get_node("AnimatedSprite").play("Walk Right")
+		$AnimationTree.get("parameters/playback").travel("Walk")
+		$AnimationTree.set("parameters/Idle/blend_position", direction)
+		$AnimationTree.set("parameters/Walk/blend_position", direction)
 		move_and_slide(speed*direction)
 	else:
-		if direction.x < 0:
-			get_node("AnimatedSprite").play("Idle Left")
-		elif direction.x > 0:
-			get_node("AnimatedSprite").play("Idle Right")
+		$AnimationTree.get("parameters/playback").travel("Idle")
 			
 func _on_Player_Check_body_entered(body):
 	if body.name == "Player":
