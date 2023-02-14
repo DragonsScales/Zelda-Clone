@@ -34,7 +34,7 @@ position = Vector2( 88, 72 )
 
 [node name="Hostile" type="YSort" parent="MainSort"]
 
-[node name="Skelly" parent="MainSort/Hostile" instance=ExtResource( 4 )]
-position = Vector2( 112, 120 )
+[node name="Hostile Skelly" parent="MainSort/Hostile" instance=ExtResource( 4 )]
+position = Vector2( 192, 80 )
 
 [node name="UI" parent="." instance=ExtResource( 5 )]

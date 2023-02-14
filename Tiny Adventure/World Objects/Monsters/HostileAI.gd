@@ -3,12 +3,14 @@ extends KinematicBody2D
 var speed = 30
 var see_player = false
 var direction = Vector2()
+var health = 5
 
 func _physics_process(delta):
-	
+	if health <= 0:
+		queue_free()
+	#he adds this in, but it doesn't actually matter
+	direction = Vector2.ZERO;
 	if see_player == true:
-		#he adds this in, but it doesn't actually matter
-		direction = Vector2.ZERO;
 		
 		var player = get_node("../../Friendly/Player")
 		direction = (player.position - position).normalized()
@@ -22,8 +24,6 @@ func _physics_process(delta):
 func _on_Player_Check_body_entered(body):
 	if body.name == "Player":
 		see_player = true
-
-
 
 func _on_Player_Check_body_exited(body):
 	if body.name == "Player":
