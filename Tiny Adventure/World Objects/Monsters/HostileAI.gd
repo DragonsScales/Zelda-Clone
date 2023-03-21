@@ -4,6 +4,8 @@ var speed = 30
 var see_player = false
 var direction = Vector2()
 var health = 5
+var knockback_dir = Vector2.ZERO
+var knockback = Vector2.ZERO
 
 func _physics_process(delta):
 	if health <= 0:
@@ -11,7 +13,6 @@ func _physics_process(delta):
 	#he adds this in, but it doesn't actually matter
 	direction = Vector2.ZERO;
 	if see_player == true:
-		
 		var player = get_node("../../Friendly/Player")
 		direction = (player.position - position).normalized()
 		$AnimationTree.get("parameters/playback").travel("Walk")
@@ -20,7 +21,9 @@ func _physics_process(delta):
 		move_and_slide(speed*direction)
 	else:
 		$AnimationTree.get("parameters/playback").travel("Idle")
-			
+	knockback_dir = direction
+	knockback = knockback.move_toward(Vector2.ZERO, 200*delta)
+	knockback = move_and_slide(knockback)
 func _on_Player_Check_body_entered(body):
 	if body.name == "Player":
 		see_player = true
@@ -28,3 +31,8 @@ func _on_Player_Check_body_entered(body):
 func _on_Player_Check_body_exited(body):
 	if body.name == "Player":
 		see_player = false
+
+
+func _on_PlayerDetect_area_entered(area):
+	if "HostileDetect" in area.name:
+		knockback = area.get_parent().knockback_dir*100
