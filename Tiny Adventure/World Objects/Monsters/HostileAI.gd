@@ -3,11 +3,16 @@ extends KinematicBody2D
 var speed = 30
 var see_player = false
 var direction = Vector2()
-var health = 5
+var health = 15
+var damage = 5
 var knockback_dir = Vector2.ZERO
 var knockback = Vector2.ZERO
+func _ready():
+	get_node("HP").max_value = health
+	get_node("HP").value = health
 
 func _physics_process(delta):
+	get_node("HP").value = health
 	if health <= 0:
 		queue_free()
 	#he adds this in, but it doesn't actually matter
@@ -35,4 +40,5 @@ func _on_Player_Check_body_exited(body):
 
 func _on_PlayerDetect_area_entered(area):
 	if "HostileDetect" in area.name:
+		#adjust the value after knockback_dir for more/less kb
 		knockback = area.get_parent().knockback_dir*100

@@ -1,13 +1,13 @@
 extends KinematicBody2D
 
-
 export (int) var speed = 80
 var attacking = false
 var knockback_dir = Vector2.ZERO
 var knockback = Vector2.ZERO
 
-
 func _physics_process(delta):
+	if Game.Player_HP <= 0:
+		get_tree().change_scene("res://GameOver.tscn")
 	check_input()
 	#200*delta is knockback speed
 	knockback = knockback.move_toward(Vector2.ZERO, 200*delta)
@@ -54,12 +54,15 @@ func check_input():
 func Attack_finished():
 	attacking = false
 
-func _on_Attack_Detector_body_exited(body):
-	print(body.name)
-	if "Hostile" in body.name:
-		body.health -= 3
-
-
 func _on_HostileDetect_area_entered(area):
 	if "PlayerDetect" in area.name:
-		knockback = area.get_parent().knockback_dir*100
+		#adjust the value after knockback_dir for more/less kb
+		Game.Player_HP -= area.get_parent().damage;
+		knockback = area.get_parent().knockback_dir*150
+
+
+func _on_Attack_Detector_area_entered(area):
+	if "PlayerDetect" in area.name:
+		#adjust the value after knockback_dir for more/less kb
+		area.get_parent().knockback = -area.get_parent().knockback_dir*100
+		area.get_parent().health -= 5
