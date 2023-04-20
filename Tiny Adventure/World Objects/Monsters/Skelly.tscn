@@ -451,6 +451,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -8 )
 frames = SubResource( 32 )
 animation = "Idle Down"
+frame = 4
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

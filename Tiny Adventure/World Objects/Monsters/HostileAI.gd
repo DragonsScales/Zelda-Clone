@@ -16,10 +16,7 @@ func _ready():
 func _physics_process(delta):
 	get_node("HP").value = health
 	if health <= 0:
-		Game.gain_experience(10)
-		Game.Gold += 100
-		queue_free()
-		Utils.save_game()
+		death()
 		
 	#he adds this in, but it doesn't actually matter
 	direction = Vector2.ZERO;
@@ -51,3 +48,10 @@ func _on_PlayerDetect_area_entered(area):
 		var hit = HIT.instance()
 		area.get_parent().add_child(hit)
 		hit.show_value(str(damage), false)
+
+func death():
+	Game.gain_experience(10)
+	Game.Gold += 100
+	if Quests.IntroQuest:
+		Quests.SkellyKilled += 1
+	queue_free()
