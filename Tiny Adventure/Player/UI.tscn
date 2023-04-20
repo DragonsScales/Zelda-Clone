@@ -184,3 +184,4 @@ script = SubResource( 86 )
 visible = false
 
 [node name="InventoryScreen" parent="." instance=ExtResource( 5 )]
+visible = false
