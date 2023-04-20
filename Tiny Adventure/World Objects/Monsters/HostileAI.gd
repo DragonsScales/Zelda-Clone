@@ -19,6 +19,7 @@ func _physics_process(delta):
 		Game.gain_experience(10)
 		Game.Gold += 100
 		queue_free()
+		Utils.save_game()
 		
 	#he adds this in, but it doesn't actually matter
 	direction = Vector2.ZERO;

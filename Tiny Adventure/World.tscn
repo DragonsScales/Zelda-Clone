@@ -40,4 +40,10 @@ position = Vector2( 88, 72 )
 [node name="Hostile Skelly" parent="MainSort/Hostile" instance=ExtResource( 4 )]
 position = Vector2( 192, 80 )
 
+[node name="Hostile Skelly2" parent="MainSort/Hostile" instance=ExtResource( 4 )]
+position = Vector2( 152, 136 )
+
+[node name="Hostile Skelly3" parent="MainSort/Hostile" instance=ExtResource( 4 )]
+position = Vector2( 88, 144 )
+
 [node name="UI" parent="." instance=ExtResource( 5 )]

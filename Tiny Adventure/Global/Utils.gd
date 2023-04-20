@@ -27,7 +27,12 @@ func save_game():
 		"FirstLaunch": Game.FirstLaunch,
 		"Player_HP": Game.Player_HP,
 		"Player_Max_HP": Game.Player_Max_HP,
-		
+		"player_lvl": Game.player_lvl,
+		"Player_Damage": Game.Player_Damage,
+		"experience": Game.experience,
+		"experience_total": Game.experience_total,
+		#I added the gold, remove if you want to follow along more closely
+		"Gold": Game.Gold
 		
 	}
 	save_game.store_line(to_json(data))
@@ -45,5 +50,11 @@ func load_game():
 			Game.FirstLaunch = current_line["FirstLaunch"]
 			Game.Player_HP = current_line["Player_HP"]
 			Game.Player_Max_HP = current_line["Player_Max_HP"]
+			Game.player_lvl = current_line["player_lvl"]
+			Game.Player_Damage = current_line["Player_Damage"]
+			Game.experience = current_line["experience"]
+			Game.experience_total = current_line["experience_total"]
+			#I added the gold, remove if you want to follow along more closely
+			Game.Gold = current_line["Gold"]
 			
 	save_game.close()

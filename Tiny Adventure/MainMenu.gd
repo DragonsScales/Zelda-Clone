@@ -3,8 +3,8 @@ extends Node2D
 
 
 func _ready():
-	#uncomment if you want to change player
-	#the character selection screen won't show the player you're actually selecting currently
+	#uncomment Utils.save_game() if you want to change player
+	#the character selection screen won't show the player you're actually selecting currently, bug he left accidentally
 	#Utils.save_game()
 	Utils.load_game()
 	
