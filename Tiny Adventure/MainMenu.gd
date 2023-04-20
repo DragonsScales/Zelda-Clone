@@ -9,6 +9,7 @@ func _ready():
 	Utils.load_game()
 	
 func _on_PlayBtn_pressed():
+	Click.play_click()
 	if Game.FirstLaunch == false:
 		StageManager.change_stage(StageManager.CharacterSelect)
 	else:
@@ -17,3 +18,7 @@ func _on_PlayBtn_pressed():
 
 func _on_Quit_pressed():
 	get_tree().quit()
+
+
+func _on_Options_pressed():
+	Click.play_click()

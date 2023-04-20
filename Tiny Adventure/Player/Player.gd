@@ -5,6 +5,14 @@ export (int) var speed = 80
 var attacking = false
 var knockback_dir = Vector2.ZERO
 var knockback = Vector2.ZERO
+############################
+var dash_object = preload("res://Player/Dash.tscn")
+var dash_speed = 1000
+var dash_length = 0.15
+onready var sprite = get_node("Walk")
+var is_dashing = false
+############################
+
 #if you don't want the crit chance, comment these 2 lines out
 #or if you want to change the probability of the critChance change the decimal, value 1 is 100%; .50 50%, etc.
 var critChance = 0.25
@@ -50,11 +58,30 @@ func check_input():
 # warning-ignore:return_value_discarded
 			move_and_slide(input_vector*speed)
 		knockback_dir = input_vector
-
+		
+	#If Attack key has been pressed
 	if Input.is_action_just_pressed("Attack"):
+		if get_node("SwordEffect").playing == false:
+			get_node("SwordEffect").play()
 		attacking = true
 		show_Sprite("Attack")
 		$AnimationTree.get("parameters/playback").travel("Attack")
+	
+	#If Dash key has been pressed
+	if Input.is_action_just_pressed("Dash"):
+		var tween1 = get_node("Tween")
+		var direction = ($AnimationTree.get("parameters/Idle/blend_position"))
+		tween1.interpolate_property(self, "position", position, position + direction * 50, 0.1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		tween1.start()
+		is_dashing = true
+		yield(get_node("Tween"), "tween_all_completed")
+		is_dashing = false
+	if (is_dashing):
+		var dash_node = dash_object.instance()
+		var direction = ($AnimationTree.get("parameters/Idle/blend_position"))
+		dash_node.direction = direction
+		dash_node.global_position = global_position
+		get_parent().add_child(dash_node)
 
 func Attack_finished():
 	attacking = false
@@ -82,7 +109,7 @@ func _on_Attack_Detector_area_entered(area):
 		area.get_parent().add_child(hit)
 		#if you want to remove crits, comment out the next 5 lines uncomment the 6th line
 		if crit:
-			hit.show_value(str(Game.Player_Damage), true)
+			hit.show_value(str(Game.Player_Damage * 2), true)
 			crit = false
 		else:
 			hit.show_value(str(Game.Player_Damage), false)
