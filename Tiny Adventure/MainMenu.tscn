@@ -40,3 +40,4 @@ rect_pivot_offset = Vector2( -280, -8 )
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/PlayBtn" to="." method="_on_PlayBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

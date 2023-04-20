@@ -12,7 +12,7 @@ var crit = false
 
 func _physics_process(delta):
 	if Game.Player_HP <= 0:
-		get_tree().change_scene("res://GameOver.tscn")
+		StageManager.change_stage(StageManager.GameOver)
 	check_input()
 	#200*delta is knockback speed
 	knockback = knockback.move_toward(Vector2.ZERO, 200*delta)

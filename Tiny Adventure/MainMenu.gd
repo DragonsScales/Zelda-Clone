@@ -10,6 +10,10 @@ func _ready():
 	
 func _on_PlayBtn_pressed():
 	if Game.FirstLaunch == false:
-		get_tree().change_scene("res://CharacterSelect.tscn");
+		StageManager.change_stage(StageManager.CharacterSelect)
 	else:
-		get_tree().change_scene("res://World.tscn")
+		StageManager.change_stage(StageManager.MainWorld)
+
+
+func _on_Quit_pressed():
+	get_tree().quit()
