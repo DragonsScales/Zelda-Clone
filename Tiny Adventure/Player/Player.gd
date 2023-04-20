@@ -1,9 +1,14 @@
 extends KinematicBody2D
 
+var HIT = preload("res://Global/HIT.tscn")
 export (int) var speed = 80
 var attacking = false
 var knockback_dir = Vector2.ZERO
 var knockback = Vector2.ZERO
+#if you don't want the crit chance, comment these 2 lines out
+#or if you want to change the probability of the critChance change the decimal, value 1 is 100%; .50 50%, etc.
+var critChance = 0.25
+var crit = false
 
 func _physics_process(delta):
 	if Game.Player_HP <= 0:
@@ -65,4 +70,21 @@ func _on_Attack_Detector_area_entered(area):
 	if "PlayerDetect" in area.name:
 		#adjust the value after knockback_dir for more/less kb
 		area.get_parent().knockback = -area.get_parent().knockback_dir*100
-		area.get_parent().health -= 5
+		
+		#Remove next 4 lines to remove crit
+		if rand_range(0, 1) <= critChance:
+			crit = true
+		if crit:
+			area.get_parent().health -= Game.Player_Damage #gets added to by next line, doubling the dmg
+			
+		area.get_parent().health -= Game.Player_Damage
+		var hit = HIT.instance()
+		area.get_parent().add_child(hit)
+		#if you want to remove crits, comment out the next 5 lines uncomment the 6th line
+		if crit:
+			hit.show_value(str(Game.Player_Damage), true)
+			crit = false
+		else:
+			hit.show_value(str(Game.Player_Damage), false)
+		#uncomment this if you don't want crits
+		#hit.show_value(str(Game.Player_Damage), false)
